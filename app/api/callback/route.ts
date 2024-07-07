@@ -1,5 +1,8 @@
-// export async function GET(req: NextRequest) {
-    
+import { NextRequest, NextResponse } from "next/server";  
+
+export async function GET(req: NextRequest) {
+    return NextResponse.json({})
+}    
 //     let token = cookies().get('token')
 //     let iD = cookies().has('token')
 
