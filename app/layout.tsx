@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
+  manifest: "./manifest.json",
   title: "Omni Storage",
   description: "Unlimited storage",
 };
