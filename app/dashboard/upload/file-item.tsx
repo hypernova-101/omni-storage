@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { Loader } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { getCookie } from "cookies-next"
 
 function FileItem({ file, repo }: { file: File, repo: Repo | null }) {
         
@@ -14,20 +15,10 @@ function FileItem({ file, repo }: { file: File, repo: Repo | null }) {
     const [progress, setProgress] = useState(0)
     const [loading, setloading] = useState(false)
     const [status, setStatus] = useState("")
-    
-    function getTokenFromCookieStore(): string | null {
-        let cookies = document.cookie.split(';')
-        for(let i = 0; i < cookies.length; i+=1) {
-            const [name, value] = cookies[i].split('=')
-            if(name==='token' && value !== undefined) {
-                return value
-            }
-        }
-        return null
-    }
 
     const upload = async () => {    
-        let token = getTokenFromCookieStore()
+     
+        let token = getCookie('token')
 
         if(!token) {
             toast('No token detected.')
@@ -42,7 +33,6 @@ function FileItem({ file, repo }: { file: File, repo: Repo | null }) {
                 const reader = new FileReader();
                 reader.onload = async () => {
                     setloading(true);
-                    setStatus('Uploading to our server...')
                     
                     const base64Content = reader?.result?.toString().split(',')[1];
 
@@ -57,7 +47,9 @@ function FileItem({ file, repo }: { file: File, repo: Repo | null }) {
                                 'Authorization': `Bearer ${token}`
                             },
                             onUploadProgress({ loaded, total }) {
-                                setProgress(Math.round((loaded * 100) / file.size))
+                                let prog = Math.round((loaded * 100) / total!)
+                                setStatus(`Uploading ${prog}%`)
+                                setProgress(prog)
                             }
                         }
                     )
