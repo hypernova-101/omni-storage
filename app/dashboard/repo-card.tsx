@@ -8,6 +8,7 @@ function RepoCard({
 }: {
     repo: Repo
 }) {
+    
     return (
         <Link
             href={`/dashboard/repos/${encodeURIComponent(repo.full_name)}`}
@@ -17,8 +18,8 @@ function RepoCard({
                 <div className='flex flex-row items-center gap-4'>
                     <Activity />
                     <div className='flex flex-col'>
-                        <h1 className='font-bold'>{repo.name}</h1>
-                        <span className='text-zinc-600 text-sm dark:text-zinc-300'>{repo.id}/{repo.name}</span>
+                        <h1 className='font-bold'>{repo.name.split('-')[0]}</h1>
+                        <span className='text-zinc-600 text-sm dark:text-zinc-300'>{repo.id}/{repo.name.split('-')[0]}</span>
                     </div>
                 </div>
                 {repo.private ? (
