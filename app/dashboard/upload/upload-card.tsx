@@ -55,7 +55,7 @@ function UploadCard() {
                             {loading ? (
                                 <Loader className='animate-spin' />
                             ) : (
-                                selectedRepo ? selectedRepo.name : <Activity />
+                                selectedRepo ? selectedRepo.name.split('-')[0] : <Activity />
                             )}
                         </Button>
                     </DropdownMenuTrigger>
@@ -69,7 +69,7 @@ function UploadCard() {
                                         ) : (
                                             <LockOpen className="mr-2 h-4 w-4" />
                                         )}
-                                        {repo.name}
+                                        {repo.name.split('-')[0]}
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator />
                                 </>
