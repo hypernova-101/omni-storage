@@ -8,6 +8,7 @@ import { Loader } from 'lucide-react';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { postRepo } from '@/lib/github/repos';
+import { useUser } from '@clerk/nextjs';
 
 function CreateForm() {
     const [name, setName] = useState<string>('')
@@ -17,11 +18,13 @@ function CreateForm() {
 
     const router = useRouter()
 
+    const { user } = useUser()
+
     const create = async () => {
         setLoading(true)
 
         try {
-            let res = await postRepo(isPrivate, name, desc)
+            let res = await postRepo(isPrivate, `${name}-${user!.id}`, desc)
             if(res === null) {
                 toast("failed to create repository")
             } else {
