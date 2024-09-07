@@ -21,7 +21,7 @@ function RepoNameLayout({
                         <ArrowLeft />
                     </Link>
                 </Button>
-                <h1 className='flex-grow text-center text-xl lg:text-2xl font-bold'>{name}</h1>
+                <h1 className='flex-grow text-center text-xl lg:text-2xl font-bold'>{name.split('-')[0]}</h1>
                 <RepoOptions/>
             </div>
 
