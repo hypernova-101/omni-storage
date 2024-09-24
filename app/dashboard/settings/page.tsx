@@ -1,4 +1,3 @@
-import { UserButton } from "@clerk/nextjs"
 import { cookies } from "next/headers"
 import TokenAvailable from "./token-available"
 import TokenNotAvailable from "./token-not-available"
@@ -14,7 +13,6 @@ function UserPage() {
 
   return (
     <div className="flex flex-1 gap-4 flex-col py-8 px-4 rounded-xl shadow-md z-50 items-center justify-center border">
-      <UserButton />
       { isValidToken ? <TokenAvailable/> : <TokenNotAvailable/> }
     </div>
   )
